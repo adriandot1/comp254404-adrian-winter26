@@ -1,4 +1,4 @@
-package linkedlists;
+package Ex3;
 
 public class CircularlyLinkedLists<E> implements Cloneable {
         //---------------- nested Node class ----------------
@@ -153,7 +153,7 @@ public class CircularlyLinkedLists<E> implements Cloneable {
 
 
         public CircularlyLinkedLists<E> clone() throws CloneNotSupportedException {
-            CircularlyLinkedLists<E> other = (CircularlyLinkedLists<E>) super.clone();
+            CircularlyLinkedLists<E> other = (CircularlyLinkedLists<E>) super.clone(); //gets new instance of list
             if (size > 0) {
                 Node<E> originalHead = tail.getNext();
                 Node<E> newHead = new Node<>(originalHead.getElement(), null);
@@ -165,30 +165,23 @@ public class CircularlyLinkedLists<E> implements Cloneable {
                     otherTail = newest;
                     walk = walk.getNext();
                 }
-                otherTail.setNext(newHead);  // close the circle
+                otherTail.setNext(newHead);  // closes the circle
                 other.tail = otherTail;
             }
             return other;
         }
 
         //main method
-        public static void main(String[] args) {
+        public static void main(String[] args) throws CloneNotSupportedException {
                 CircularlyLinkedLists<String> list = new CircularlyLinkedLists<>();
                 list.addFirst("C");
                 list.addFirst("B");
                 list.addFirst("A");
                 list.addLast("D");
                 System.out.println("Original list: " + list);
-                System.out.println("  first =" + list.first() + ", last =" + list.last() + ", size =" + list.size());
 
-            CircularlyLinkedLists<String> copy = null;
-            try {
-                copy = list.clone();
-            } catch (CloneNotSupportedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("Cloned list:   " + copy);
-                System.out.println("  first =" + copy.first() + ", last =" + copy.last() + ", size =" + copy.size());
+                CircularlyLinkedLists<String> copy = list.clone();
+                System.out.println("Cloned list:   " + copy);
 
                 list.removeFirst();
                 System.out.println("removeFirst on original: " + list);

@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package linkedlists;
+package Ex2;
 
 /**
  * A basic singly linked list implementation.
@@ -36,7 +36,7 @@ public class SinglyLinkedList<E> implements Cloneable {
      * element and to the subsequent node in the list (or null if this
      * is the last node).
      */
-    private static class Node<E> {
+    public static class Node<E> {
 
         /** The element stored at this node */
         private E element;            // reference to the element stored at this node
@@ -220,18 +220,31 @@ public class SinglyLinkedList<E> implements Cloneable {
         sb.append(")");
         return sb.toString();
     }
-    //main method
-    public static void main(String[] args)
-    {
 
-        SinglyLinkedList<String> list = new SinglyLinkedList<String>();
+    public Node<E> getNodeAt(int index) {
+        if (index < 0 || index >= size) return null;
+        Node<E> current = head;
+        for (int i = 0; i < index; i++) current = current.getNext();
+        return current;
+    }
+
+    //main method
+    public static void main(String[] args) {
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
         list.addFirst("MSP");
         list.addLast("ATL");
         list.addLast("BOS");
-        //
         list.addFirst("LAX");
-        System.out.println(list);
-        //
+        list.addLast("MIA");
+
+        System.out.println("List: " + list);
+
+        SinglyLinkedList.Node<String> node1 = list.getNodeAt(0);
+        SinglyLinkedList.Node<String> node2 = list.getNodeAt(2);
+
+        list.swapNodes(node1, node2);
+
+        System.out.println("After swapNodes: " + list);
     }
 
     public void swapNodes(Node<E> node1, Node<E> node2){
@@ -239,50 +252,41 @@ public class SinglyLinkedList<E> implements Cloneable {
             return;
         }
 
-        Node<E> prev1 = null;
-        Node<E> prev2 = null;
+        Node<E> node1Prev = null;
+        Node<E> node2Prev = null;
 
         Node<E> current = head;
 
-        while(current != null && prev1 == null || prev2 == null){
+        while(current != null && node1Prev == null || node2Prev == null){
            if(current.getNext() == node1){
-               prev1 = current;
+               node1Prev = current;
            }
            if(current.getNext() == node2){
-               prev2 = current;
+               node2Prev = current;
            }
 
            current = current.getNext();
 
-           if (prev1 != null){
-               prev1.setNext(node2);
+           if (node1Prev != null){
+               node1Prev.setNext(node2); //swapping node2 with where node1 was
            }
            else{
                head = node2;
            }
 
-           if(prev2 != null){
-               prev2.setNext(node1);
+           if(node2Prev != null){
+               node2Prev.setNext(node1); //swapping node 1 with where node2 was
            }
            else{
                head = node1;
            }
 
+           //keeps the original value
            Node<E> temp = node1.getNext();
            node1.setNext(node2.getNext());
            node2.setNext(temp);
         }
 
     }
-
-        public void display() {
-            Node<E> current = head;
-            while (current != null) {
-                System.out.print(current.getElement() + " -> ");
-                current = current.getNext();
-            }
-            System.out.println("null");
-        }
-
 
 }
