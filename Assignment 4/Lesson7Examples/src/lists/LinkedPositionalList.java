@@ -425,11 +425,6 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
     return -1;
   }
 
-  // Debugging code
-  /**
-   * Produces a string representation of the contents of the list.
-   * This exists for debugging purposes only.
-   */
   public String toString() {
     StringBuilder sb = new StringBuilder("(");
     Node<E> walk = header.getNext();
