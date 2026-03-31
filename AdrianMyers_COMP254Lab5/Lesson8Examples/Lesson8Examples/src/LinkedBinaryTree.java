@@ -301,21 +301,31 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
   public static void main(String[] args)
   {
-	  //create and populate a linked binary tree
-	  LinkedBinaryTree lbt = new LinkedBinaryTree();
-	  Position<String> root =lbt.addRoot("ICET");
+	  // //create and populate a linked binary tree
+	  // LinkedBinaryTree lbt = new LinkedBinaryTree();
+	  // Position<String> root =lbt.addRoot("ICET");
 	  
-	  //	  
-	  Position<String> softwarePosition = lbt.addLeft(root, "Software");
-	  Position<String> networkingPosition = lbt.addRight(root, "Networking");
-	  Position<String> set = lbt.addLeft(softwarePosition, "SET");
-	  Position<String> ig = lbt.addRight(softwarePosition, "IG");
+	  // //	  
+	  // Position<String> softwarePosition = lbt.addLeft(root, "Software");
+	  // Position<String> networkingPosition = lbt.addRight(root, "Networking");
+	  // Position<String> set = lbt.addLeft(softwarePosition, "SET");
+	  // Position<String> ig = lbt.addRight(softwarePosition, "IG");
 
-	  //
-	  printPreorder(lbt);
-	  parenthesize(lbt, root);
+	  // //
+	  // printPreorder(lbt);
+	  // parenthesize(lbt, root);
 	  
-	  
+  LinkedBinaryTree<String> tree = new LinkedBinaryTree<>();
+
+  Position<String> root = tree.addRoot("A");
+  Position<String> b = tree.addLeft(root, "B");
+  Position<String> c = tree.addRight(root, "C");
+  Position<String> d = tree.addLeft(b, "D");
+  Position<String> e = tree.addRight(b, "E");
+  Position<String> f = tree.addLeft(c, "F");
+
+  tree.printSubtree();
+
   
   }
   /** Prints parenthesized representation of subtree of T rooted at p. */

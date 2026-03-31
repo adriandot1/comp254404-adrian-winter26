@@ -23,6 +23,9 @@
 
 import java.util.Iterator;
 import java.util.List;         // for use as snapshot iterator
+
+import javax.swing.tree.TreeNode;
+
 import java.util.ArrayList;    // for use as snapshot iterator
 
 /**
@@ -227,5 +230,27 @@ public abstract class AbstractTree<E> implements Tree<E> {
       }
     }
     return snapshot;
+  }
+
+  public void printSubtree(){
+    if(!isEmpty()){
+      printSubtree(root());
+    }
+  }
+
+  private int printSubtree(Position<E> p){
+    int maxHeight = -1;
+    for(Position<E> c : children(p)){
+      int childheight = printSubtree(c);
+      if(childheight > maxHeight){
+        maxHeight = childheight;
+      }
+    }
+
+    int subtreeHeight = maxHeight + 1;
+    System.out.println(p.getElement() + " " + subtreeHeight);
+    return subtreeHeight;
+
+  
   }
 }
